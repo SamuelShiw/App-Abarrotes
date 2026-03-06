@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTituloRegistrarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar producto"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/tvLabelSeccionProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sección"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spSeccionProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp" />
+
+        <TextView
+            android:id="@+id/tvLabelEstanteProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Estante"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spEstanteProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp" />
+
+        <EditText
+            android:id="@+id/etCodigoProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Código"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etNombreProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Nombre"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etDescripcionProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Descripción"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etPrecioProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Precio"
+            android:inputType="numberDecimal"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etStockAlmacenProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Stock almacén"
+            android:inputType="number"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etStockEstanteProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Stock estante"
+            android:inputType="number"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etFechaVencimientoProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Fecha vencimiento (yyyy-mm-dd)"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/btnGuardarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Guardar producto"
+            android:background="@drawable/bg_button_primary"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</ScrollView>

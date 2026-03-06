@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTituloEditarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Editar producto"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etCodigoEditarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Código"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etNombreEditarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Nombre"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etDescripcionEditarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Descripción"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etPrecioEditarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Precio"
+            android:inputType="numberDecimal"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etStockAlmacenEditarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Stock almacén"
+            android:inputType="number"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etStockEstanteEditarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Stock estante"
+            android:inputType="number"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/etFechaVencimientoEditarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Fecha vencimiento"
+            android:background="@drawable/bg_input"
+            android:padding="12dp" />
+
+        <Button
+            android:id="@+id/btnActualizarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Actualizar producto"
+            android:background="@drawable/bg_button_primary"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnDesactivarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Desactivar producto" />
+
+    </LinearLayout>
+
+</ScrollView>

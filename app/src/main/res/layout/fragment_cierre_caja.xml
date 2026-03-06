@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvTituloCierreCaja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cierre de Caja"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/tvInfoCajaAbierta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No hay caja abierta"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etMontoFinalCaja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Monto final en caja"
+        android:inputType="numberDecimal"
+        android:background="@drawable/bg_input"
+        android:padding="12dp" />
+
+    <Button
+        android:id="@+id/btnCerrarCaja"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="Cerrar caja"
+        android:background="@drawable/bg_button_primary"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
