@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragmentContainerReponedor"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvTituloPanelReponedor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Panel Reponedor"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnModuloProductosSeccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Productos por sección" />
+
+        <Button
+            android:id="@+id/btnModuloCaducidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Caducidad" />
+
+        <Button
+            android:id="@+id/btnModuloFaltantes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Productos faltantes" />
+
+        <Button
+            android:id="@+id/btnModuloReposicion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Reposición de productos" />
+
+        <Button
+            android:id="@+id/btnCerrarSesionReponedor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Cerrar sesión"
+            android:background="@drawable/bg_button_primary"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragmentContainerReponedor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
