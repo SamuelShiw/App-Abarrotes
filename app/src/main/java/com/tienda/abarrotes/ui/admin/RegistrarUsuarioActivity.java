@@ -15,13 +15,15 @@ import com.tienda.abarrotes.data.model.Rol;
 import com.tienda.abarrotes.data.model.Trabajador;
 import com.tienda.abarrotes.data.model.Usuario;
 import com.tienda.abarrotes.repository.TrabajadorRepository;
+import com.tienda.abarrotes.ui.common.utils.SessionManager;
 import com.tienda.abarrotes.viewmodel.UsuarioViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RegistrarUsuarioActivity extends AppCompatActivity {
 
-    private EditText etTrabajadorIdUsuario;
+    private Spinner spTrabajadorUsuario;
     private EditText etUsernameUsuario;
     private EditText etPasswordUsuario;
     private Spinner spRolUsuario;
@@ -29,6 +31,10 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
     private UsuarioViewModel usuarioViewModel;
     private TrabajadorRepository trabajadorRepository;
+    private SessionManager sessionManager;
+
+    private final List<Trabajador> listaTrabajadores = new ArrayList<>();
+    private final List<String> itemsTrabajadores = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +43,56 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
         usuarioViewModel = new ViewModelProvider(this).get(UsuarioViewModel.class);
         trabajadorRepository = new TrabajadorRepository(this);
+        sessionManager = new SessionManager(this);
 
         initViews();
+        cargarTrabajadores();
         cargarRoles();
         setListeners();
     }
 
     private void initViews() {
-        etTrabajadorIdUsuario = findViewById(R.id.etTrabajadorIdUsuario);
+        spTrabajadorUsuario = findViewById(R.id.etTrabajadorIdUsuario);
         etUsernameUsuario = findViewById(R.id.etUsernameUsuario);
         etPasswordUsuario = findViewById(R.id.etPasswordUsuario);
         spRolUsuario = findViewById(R.id.spRolUsuario);
         btnGuardarUsuario = findViewById(R.id.btnGuardarUsuario);
     }
 
+    private void cargarTrabajadores() {
+        listaTrabajadores.clear();
+        itemsTrabajadores.clear();
+
+        itemsTrabajadores.add("Seleccione un trabajador");
+
+        List<Trabajador> trabajadoresActivos = trabajadorRepository.listarTrabajadoresActivos();
+        if (trabajadoresActivos != null) {
+            for (Trabajador trabajador : trabajadoresActivos) {
+                if (!usuarioViewModel.existeUsuarioActivoPorTrabajador(trabajador.getId())) {
+                    listaTrabajadores.add(trabajador);
+
+                    String item = trabajador.getId() + " - "
+                            + trabajador.getNombres() + " "
+                            + trabajador.getApellidos()
+                            + " (" + trabajador.getCargo() + ")";
+
+                    itemsTrabajadores.add(item);
+                }
+            }
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                itemsTrabajadores
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spTrabajadorUsuario.setAdapter(adapter);
+    }
+
     private void cargarRoles() {
-        List<String> roles = usuarioViewModel.obtenerRolesDisponiblesParaAdmin();
+        String rolLogueado = sessionManager.getRolNombre();
+        List<String> roles = usuarioViewModel.obtenerRolesDisponiblesSegunSesion(rolLogueado);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
@@ -68,29 +108,24 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
     }
 
     private void guardarUsuario() {
-        String trabajadorIdTexto = etTrabajadorIdUsuario.getText().toString().trim();
+        Trabajador trabajadorSeleccionado = obtenerTrabajadorSeleccionado();
         String username = etUsernameUsuario.getText().toString().trim();
         String password = etPasswordUsuario.getText().toString().trim();
-        String nombreRol = spRolUsuario.getSelectedItem() != null
-                ? spRolUsuario.getSelectedItem().toString()
-                : "";
+        String nombreRol = obtenerRolSeleccionado();
+        String rolLogueado = sessionManager.getRolNombre();
 
-        int trabajadorId;
-        try {
-            trabajadorId = Integer.parseInt(trabajadorIdTexto);
-        } catch (Exception e) {
-            trabajadorId = -1;
-        }
+        int trabajadorId = trabajadorSeleccionado != null ? trabajadorSeleccionado.getId() : -1;
 
-        String validacion = usuarioViewModel.validarCampos(trabajadorId, username, password, nombreRol);
+        String validacion = usuarioViewModel.validarCampos(
+                trabajadorId,
+                username,
+                password,
+                nombreRol,
+                rolLogueado
+        );
+
         if (validacion != null) {
             Toast.makeText(this, validacion, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Trabajador trabajador = trabajadorRepository.obtenerTrabajadorPorId(trabajadorId);
-        if (trabajador == null) {
-            Toast.makeText(this, "No existe el trabajador indicado", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -125,5 +160,34 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "No se pudo registrar el usuario", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private Trabajador obtenerTrabajadorSeleccionado() {
+        int position = spTrabajadorUsuario.getSelectedItemPosition();
+
+        if (position <= 0) {
+            return null;
+        }
+
+        int indexReal = position - 1;
+        if (indexReal < 0 || indexReal >= listaTrabajadores.size()) {
+            return null;
+        }
+
+        return listaTrabajadores.get(indexReal);
+    }
+
+    private String obtenerRolSeleccionado() {
+        Object selectedItem = spRolUsuario.getSelectedItem();
+        if (selectedItem == null) {
+            return "";
+        }
+
+        String rol = selectedItem.toString().trim();
+        if ("Seleccione un rol".equalsIgnoreCase(rol)) {
+            return "";
+        }
+
+        return rol;
     }
 }

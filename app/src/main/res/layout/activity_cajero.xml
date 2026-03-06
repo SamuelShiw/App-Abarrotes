@@ -40,6 +40,15 @@
             android:layout_marginTop="10dp"
             android:text="Cierre de caja" />
 
+        <Button
+            android:id="@+id/btnCerrarSesionCajero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Cerrar sesión"
+            android:background="@drawable/bg_button_primary"
+            android:textColor="@android:color/white" />
+
     </LinearLayout>
 
     <FrameLayout

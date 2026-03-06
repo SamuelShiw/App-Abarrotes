@@ -19,12 +19,10 @@
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
 
-        <EditText
+        <Spinner
             android:id="@+id/etTrabajadorIdUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ID del trabajador"
-            android:inputType="number"
             android:background="@drawable/bg_input"
             android:padding="12dp" />
 

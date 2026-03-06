@@ -25,7 +25,12 @@ public class UsuarioViewModel extends AndroidViewModel {
         rolDao = new RolDao(application);
     }
 
-    public String validarCampos(int trabajadorId, String username, String password, String nombreRol) {
+    public String validarCampos(int trabajadorId,
+                                String username,
+                                String password,
+                                String nombreRol,
+                                String rolLogueado) {
+
         if (trabajadorId <= 0) {
             return "Seleccione un trabajador";
         }
@@ -50,6 +55,10 @@ public class UsuarioViewModel extends AndroidViewModel {
             return "Seleccione un rol";
         }
 
+        if (!rolPermitidoParaSesion(nombreRol, rolLogueado)) {
+            return "No tiene permisos para asignar ese rol";
+        }
+
         return null;
     }
 
@@ -69,11 +78,24 @@ public class UsuarioViewModel extends AndroidViewModel {
         return usuarioRepository.insertarUsuario(usuario);
     }
 
-    public List<String> obtenerRolesDisponiblesParaAdmin() {
+    public List<String> obtenerRolesDisponiblesSegunSesion(String rolLogueado) {
         List<String> roles = new ArrayList<>();
-        roles.add("ADMINISTRADOR");
-        roles.add("CAJERO");
-        roles.add("REPONEDOR");
+        roles.add("Seleccione un rol");
+
+        if ("SUPERADMINISTRADOR".equalsIgnoreCase(rolLogueado)) {
+            roles.add("ADMINISTRADOR");
+            roles.add("CAJERO");
+            roles.add("REPONEDOR");
+        } else if ("ADMINISTRADOR".equalsIgnoreCase(rolLogueado)) {
+            roles.add("CAJERO");
+            roles.add("REPONEDOR");
+        }
+
         return roles;
+    }
+
+    private boolean rolPermitidoParaSesion(String nombreRol, String rolLogueado) {
+        List<String> rolesPermitidos = obtenerRolesDisponiblesSegunSesion(rolLogueado);
+        return rolesPermitidos.contains(nombreRol);
     }
 }
